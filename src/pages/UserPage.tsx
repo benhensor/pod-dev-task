@@ -90,7 +90,7 @@ export default function UserPage({ handleDelete }: UserPageProps) {
     // Define form field classes to reduce repetition
     const formFieldClasses = 'flex flex-col items-left mb-4'
     const labelClasses = 'block text-gray-700 text-sm font-bold'
-    const inputClasses = 'input border-gray-300 rounded-sm font-bold'
+    const inputClasses = 'input border-gray-300 rounded-sm font-bold text-lg'
 
     return (
         <>
@@ -99,7 +99,7 @@ export default function UserPage({ handleDelete }: UserPageProps) {
 
                     <h1 className="font-bold text-center text-4xl mb-8">User Page</h1>
                     {user ? (
-                        <form className="flex flex-col items-left bg-white w-96 p-8 rounded-lg shadow-lg mb-10" onSubmit={handleSubmit}>
+                        <form className="flex flex-col items-left bg-white w-80 p-8 rounded-lg shadow-lg mb-10" onSubmit={handleSubmit}>
                             <div className={formFieldClasses}>
                                 <label htmlFor="avatar" className={labelClasses}>Avatar:</label>
                                 <img src={user.image} alt={user.firstName + ' ' + user.lastName} className="w-24 h-24 rounded-full mr-5" />
@@ -179,8 +179,8 @@ export default function UserPage({ handleDelete }: UserPageProps) {
                                 </div>
                             </div>
 
-                            <button type="submit" className="text-center bg-gray-600 text-white w-48 rounded cursor-pointer mb-4">Update User</button>
-                            <button type="button" className="text-center bg-red-700 text-white w-48 rounded cursor-pointer" onClick={handleDeleteClick}>Delete User</button>
+                            <button type="submit" className="text-center bg-gray-600 text-white w-full rounded cursor-pointer mb-4 p-1">Update User</button>
+                            <button type="button" className="text-center bg-red-700 text-white w-full rounded cursor-pointer p-1" onClick={handleDeleteClick}>Delete User</button>
                         </form>
                     ) : (
                         <p>Loading...</p>
