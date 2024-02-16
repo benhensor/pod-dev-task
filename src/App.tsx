@@ -72,6 +72,8 @@ function App() {
             } />
             <Route path="/user/:userId" element={
                 <UserPage 
+                    users={users}
+                    setUsers={setUsers}
                     handleDelete={handleDelete}
                 />
             } />

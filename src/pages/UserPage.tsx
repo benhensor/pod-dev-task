@@ -4,10 +4,12 @@ import { User } from "../interfaces/User"
 
 // Define the UserPage component
 type UserPageProps = {
+    users: User[];
+    setUsers: (users: User[]) => void;
     handleDelete: () => void
 }
 
-export default function UserPage({ handleDelete }: UserPageProps) {
+export default function UserPage({ users, setUsers, handleDelete }: UserPageProps) {
 
     const navigate = useNavigate()
 
@@ -67,9 +69,12 @@ export default function UserPage({ handleDelete }: UserPageProps) {
     // Update user data on form submit 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        if (!formValues) return
+        if (!formValues || !userId) return
 
-        fetch(`https://dummyjson.com/users/${userId}`, {
+        const userIdNumber = parseInt(userId, 10) // Convert userId to number
+        if (isNaN(userIdNumber)) return
+
+        fetch(`https://dummyjson.com/users/${userId}`, { // Simulated update user API endpoint
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formValues)
@@ -78,7 +83,9 @@ export default function UserPage({ handleDelete }: UserPageProps) {
         .then(data => {
             console.log('User updated:', data)
             setUser(data)
+            setUsers(users.map(user => user.id === userIdNumber ? data : user)) // Update user in state by using converted userId number to match user id
         });
+        
     }
 
     // Delete user
